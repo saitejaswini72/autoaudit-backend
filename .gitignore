@@ -1,0 +1,6 @@
+.env
+//this is created to store compiled bytecode which is used for fast loading
+__pycache__/ 
+
+//these are compiled python files.
+*.pyc
