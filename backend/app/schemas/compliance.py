@@ -1,6 +1,7 @@
 # backend/app/schemas/compliance.py
 from pydantic import BaseModel
 from typing import List, Optional, Any
+from datetime import datetime
 
 class IssueIn(BaseModel):
     rule_id: Optional[int] = None
@@ -31,16 +32,16 @@ class IssueOut(BaseModel):
     description: Optional[str]
     result: Optional[str]
     evidence: Optional[Any]
-    created_at: Optional[str]
+    created_at: Optional[datetime]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ScanOut(BaseModel):
     id: int
     tenant_id: int
-    started_at: Optional[str]
-    finished_at: Optional[str]
+    started_at: Optional[datetime]
+    finished_at: Optional[datetime]
     status: Optional[str]
     compliance_score: Optional[float]
     total_controls: Optional[int]
@@ -50,7 +51,7 @@ class ScanOut(BaseModel):
     notes: Optional[str]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ScanReportOut(BaseModel):
     scan: ScanOut

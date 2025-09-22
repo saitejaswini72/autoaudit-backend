@@ -6,10 +6,11 @@ services:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
             POSTGRES_DB: autoaudit
-        volumes:
-            - ./db/autoaudit_schema.sql:/docker-entrypoint-initdb.d/autoaudit_schema.sql
         ports:
-            - '5432:5432'
+            - '5433:5432'
+        volumes:
+            - db_data:/var/lib/postgresql/data
+            - ./db/autoaudit_schema.sql:/docker-entrypoint-initdb.d/autoaudit_schema.sql
 
     redis:
         image: redis:alpine
@@ -27,3 +28,6 @@ services:
         depends_on:
             - db
             - redis
+
+volumes:
+    db_data:
